@@ -1154,6 +1154,14 @@ uint64_t os_fileinfo_hardlinks(const FileInfo *file_info)
   return file_info->stat.st_nlink;
 }
 
+/// Tell if the file is a symbolic link from a `FileInfo`
+///
+/// @return `true` if file is a symbolic link, `false` if it's not
+bool os_fileinfo_is_sym(const FileInfo *file_info)
+{
+  return S_ISLNK(file_info.st_mode);
+}
+
 /// Get the blocksize from a `FileInfo`.
 ///
 /// @return blocksize in bytes.
@@ -1179,6 +1187,7 @@ bool os_fileid(const char *path, FileID *file_id)
   }
   return false;
 }
+
 
 /// Check if two `FileID`s are equal
 ///
